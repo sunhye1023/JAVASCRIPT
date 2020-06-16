@@ -18,9 +18,10 @@
         function add() {
             var num2 = 100;
             var num2 = 200;
+            console.log("함수안 num2는?" + num2);
         }
         add(); //함수호출
-        console.log("num2는?" + num2); //함수안에 선언된 변수는 지역변수의 개념을 갖는다.
+        console.log("함수밖 num2는?" + num2); //함수안에 선언된 변수는 지역변수의 개념을 갖는다.
 
         console.log("----------------------");
         
@@ -36,9 +37,10 @@
         function add2() {
             let num4 = 200;
             //let num4 = 300; //같은 중괄호안에서 동일변수 선언을 금지함
+            console.log("함수안 num4는?" + num4);
         }
         add2();
-        console.log("num4는?" + num4);
+        console.log("함수밖 num4는?" + num4);
 
     </script>
 

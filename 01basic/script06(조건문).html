@@ -9,7 +9,7 @@
     
     <script>
         
-        //parseint(값) - 정수형으로 변환
+        //parseInt(값) - 정수형으로 변환
         var point = parseInt(Math.random()*101);
         console.log(point);
 
@@ -22,11 +22,13 @@
             }
 
         } else if(point>=80) {
-            document.write("B학점")
+            document.write("B학점");
         } else if(point>=70) {
-            document.write("C학점")
+            document.write("C학점");
         } else if(point>=60) {
-            document.write("F학점")
+            document.write("F학점");
+        } else {
+            document.write("공부하세요");
         }
 
 

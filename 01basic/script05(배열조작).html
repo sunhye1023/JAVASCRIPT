@@ -34,12 +34,12 @@
         console.log(arr);
         arr.splice(1, 2) //1번째 인텍스에서 2개 삭제
         console.log(arr);  
-        arr.splice(1, 0, "park", "kim", "lee", "choi"); //1번째 인덱스에서 0개를 삭제, 그 이후에 문자를 추가
+        arr.splice(1, 0, 'park', 'kim', 'lee', 'choi'); //1번째 인덱스에서 0개를 삭제, 그 이후에 문자를 추가
         console.log(arr);
 
         //indexof() - 배열안의 값 검색
-        console.log("park이 있는 위치" + arr.indexof("park"));
-
+        console.log(arr.indexOf('park'));
+ 
         //sort() - 차순 정렬
         arr.sort();
         console.log(arr); 
