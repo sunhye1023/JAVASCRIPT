@@ -16,14 +16,11 @@
 
         function func() {
             var a = "홍길동";
-
+            console.log(a); //홍길동
             return function() {
                 return a;
             }
-
-            //console.log(result());
         }
-
         var b = func();
         console.log(b); //b에 함수자체가 반환된다
         console.log(b()); //함수 실행시 a의 자원이 해제되지 않는다

@@ -28,7 +28,7 @@
     <button type="button" onclick="check2(this)" id="c">3</button>
     <button type="button" onclick="check2(this)" id="d">4</button>
     <button type="button" onclick="check2(this)" id="e">5</button>
-    <!-- this는 나자신의 태그를 넘겨준다 -->
+    <!-- this는 나자신의 태그를 넘겨준다(실행되는 나 자신) -->
     
     <script>
         function check1() {
@@ -36,7 +36,7 @@
         }
 
         function check2(a) {
-            console.log(a); //this를 통해서 태그를 얻습니다
+            console.log(b); //this를 통해서 태그를 얻습니다
             console.log(a.id); //속성값은 .으로 접근이 가능합니다
             console.log(a.innerHTML); //innerHTML키워드는 태그안에 text값을 얻습니다
             a.innerHTML = a.id;
