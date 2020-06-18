@@ -34,6 +34,8 @@
             height: 100%;
         }
 
+        .right .inner a {color: black;}
+
     </style>
 
 
@@ -57,8 +59,10 @@
             </div>
             <div class="right">
                 <div class="inner">
-                    <p>자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. 이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고 있다. 또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다</p>
-                    <a href="https://www.naver.com">위키백과</a>
+                    <p>자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. 
+                        이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고 있다. 
+                        또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다</p>
+                    <a href="https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8">위키백과</a>
                 </div>
             </div>            
         </div>
@@ -71,16 +75,21 @@
 
         var body = document.querySelector("body");
         var all = document.querySelectorAll("h2, p, a");
-
         dark.onclick = function() {
             
             body.style.backgroundColor = "black";
             
-            for(var i = 0 ; i < all.length; i++) {
+            for(var i=0 ; i<all.length; i++) {
                 all[i].style.color = "white";
             }
-            
+        }
 
+        bright.onclick = function() {
+            body.style.backgroundColor = "white";
+            
+            for(var i=0; i<all.length; i++) {
+                all[i].style.color = "black";
+            }
         }
 
     </script>
