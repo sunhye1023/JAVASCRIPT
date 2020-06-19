@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        .center {
+            text-align: center;
+        }
+
+        .content {
+            overflow: hidden;
+            border: 1px solid #777;
+            width: 80%;
+            margin: 0 auto;
+            padding: 5px;
+
+        }
+
+        .content .left,
+        .content .right {
+            float: left;
+            width: 50%;
+            box-sizing: border-box;
+            padding: 5px;
+        }
+
+        .left .inner,
+        .right .inner {
+            overflow: hidden;
+            border: 1px solid #777;
+            height: 300px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .right .inner a {
+            color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <div class="center">
+            <h2>야간모드</h2>
+            <button id="btn1" class="dark">다크모드</button>
+            <button id="btn2" class="namel">이름보기</button>
+            <button id="btn3" class="write">메모장모드</button>
+            <hr>
+        </div>
+    </header>
+
+    <section>
+        <div class="content">
+            <div class="left">
+                <div class="inner"><img src="profile.png"></div>
+            </div>
+            <div class="right">
+                <div class="inner">
+                    <p>자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다.
+                        이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고 있다.
+                        또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다</p>
+                    <a
+                        href="https://ko.wikipedia.org/wiki/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8">위키백과</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+        var btn1 = document.getElementById("btn1");
+        var dark = document.getElementById("dark");
+        var bright = document.getElementById("bright");
+
+        var body = document.querySelector("body");
+        var all = document.querySelectorAll("h2, p, a");
+
+        btn1.onclick = function () {
+            console.dir(dark);
+            if (btn1.className === "dark") {
+                btn1.innerHTML = "라이트모드";
+                btn1.className = "bright"
+
+                body.style.backgroundColor = "black";
+
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.color = "white";
+                }
+            } else {
+                btn1.innerHTML = "다크모드";
+                btn1.className = "dark";
+
+                body.style.backgroundColor = "white";
+
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.color = "black";
+                }
+            }
+        }
+
+        var btn2 = document.getElementById("btn2");
+        var p = document.querySelector(".inner > p");
+        var a = document.querySelector(".inner > a");
+
+        var namel = document.getElementById("namel");
+        var substance = document.getElementById("substance");
+
+        btn2.onclick = function () {
+            if (btn2.className === "namel") {
+                btn2.innerHTML = "내용보기";
+                btn2.className = "substance";
+
+                p.innerHTML = "홍길동 <br>나이: 20세 <br> 능력단위: Java, Oracle, JSP, CSS, JavaScript";
+                a.style.display = "none";
+
+            } else {
+                btn2.innerHTML = "이름보기";
+                btn2.className = "namel";
+
+                p.innerHTML = "자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다. 이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고 있다. 또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다";
+                p.style.display = "inline";
+
+            }
+        }
+
+        var btn3 = document.getElementById("btn3");
+        var write = document.getElementById("write");
+        var photo = document.getElementById("photo");
+        var inner = document.querySelector(".inner > img");
+
+        btn3.onclick = function () {
+
+            //자식태그 삭제
+            var inner = document.querySelector(".left > .inner");
+            console.log(inner);
+            console.log(inner.children);
+            //태그가 지워지면서 index가 당겨져오기 때문에 i의 증가없이 0번째만 삭제
+            for (var i = 0; i < inner.children.length; ) {
+                inner.removeChild(inner.children[i]); //삭제
+            }
+
+            if (btn3.className === "write") {
+                
+                var textarea = document.createElement("textarea");
+                var button = document.createElement("button");
+                textarea.style.width = "100%";
+                textarea.style.height = "100px";
+                textarea.style.boxSizing = "border-box";
+                textarea.style.resize = "vertical";
+
+                button.innerHTML = "등록하기";
+                inner.appendChild(textarea);
+                inner.appendChild(button);
+
+                btn3.innerHTML = "사진모드";
+                btn3.className = "photo";
+
+            } else {
+                var img = document.createElement("img");
+                img.src = "profile.png";
+                inner.appendChild(img);
+
+                btn3.innerHTML = "메모장모드";
+                btn3.className = "write";
+
+            }
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
