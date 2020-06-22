@@ -6,6 +6,7 @@
     <title>Document</title>
 
     <style>
+        ul, li {list-style: none; display: inline-block;}
         table {
             border: 1px solid #777;
             border-spacing: 0px;
@@ -18,8 +19,27 @@
 
 </head>
 <body>
+    
+    <h3>다중이벤트(버블링 코드로 변경)</h3>
 
-    <h3>event속성을 이용해서 다음을 구현하세요</h3>
+    <div>
+        <ul class="photo">
+            <li><img src="img/1.jpg" alt="1" width="100"></li>
+            <li><img src="img/2.jpg" alt="2" width="100"></li>
+            <li><img src="img/3.jpg" alt="3" width="100"></li>
+            <li><img src="img/4.jpg" alt="4" width="100"></li>
+        </ul>
+    </div>
+
+    결과
+    <div class="result">
+        <img src="img/1.jpg" alt="결과" width="300">
+    </div>
+
+    <hr>
+
+    <h3>event속성을 이용해서 다음을 구현하세요(버블링 코드로 변경)</h3>
+
     <table>
         <thead>
             <tr>
@@ -57,25 +77,30 @@
         </tbody>
     </table>
 
+
     <script>
 
-        var list = document.querySelectorAll(".list button");
+        var photo = document.querySelector(".photo");
+        var result = document.querySelector(".result img");
 
-        for(var i=0; i<list.length; i++) {
-            /* list[i].onclick = function() {
-                event.target.parentElement.parentElement.remove();//현재 대상의 부모노드 자체를 삭제
-                //console.log(event.target.parentElement.parentElement); 
-                } */
-                list[i].addEventListener("click", handleChange);
+        photo.onclick = function() {
+            if(event.target.tagName !== "IMG") return;
+            //console.log(event.target); //img
+            //console.dir(event.currentTarget); //ul
 
-            }
+            result.src = event.target.src;
 
-            
-            function handleChange(event) {
-                event.target.parentElement.parentElement.remove();
         }
 
-        
+        var list = document.querySelector(".list");
+        list.onclick = function() {
+
+            if(event.target.tagName !== "BUTTON") return;
+            event.target.parentElement.parentElement.remove();
+
+        }
+
+
 
     </script>
     

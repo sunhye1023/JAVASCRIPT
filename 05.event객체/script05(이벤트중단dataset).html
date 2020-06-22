@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul class="nameList">
+        <!-- <li><a href="#" data-userInfo="1">홍길동</a></li>
+        <li><a href="#" data-userInfo="2">강감찬</a></li>
+        <li><a href="#" data-userInfo="3">고길동</a></li>
+        <li><a href="#" data-userInfo="4">이순신</a></li> -->
+
+        <li><a href="#" data-userInfo='{"id":"1","age":"20"}'>홍길동</a></li>
+        <li><a href="#" data-userInfo='{"id":"2","age":"30"}'>강감찬</a></li>
+        <li><a href="#" data-userInfo='{"id":"3","age":"40"}'>고길동</a></li>
+        <li><a href="#" data-userInfo='{"id":"4","age":"50"}'>이순신</a></li>
+    </ul>
+
+    <script>
+        var nameList = document.querySelector(".nameList");
+        nameList.onclick = function() {
+            event.preventDefault(); //a의 고유이벤트 중단
+            if(event.target.tagName !== "A") return; //a태그가 아니라면 종료
+            console.dir(event.target.dataset);
+            //console.dir(event.target.dataset.userinfo); //dataset -> 태그에 데이터를 저장하는 곳
+            //현재이벤트 속성에 dataset중에서 userinfo라는 이름을 가지고 있는 것을 가져왔다
+
+            var data = event.target.dataset.userinfo;
+            var jsonData = JSON.parse(data);
+            console.log(jsonData);
+            console.log("id : " + jsonData.id, "age : " + jsonData.age);
+
+        }
+
+
+
+    </script>
+
+
+</body>
+</html>
