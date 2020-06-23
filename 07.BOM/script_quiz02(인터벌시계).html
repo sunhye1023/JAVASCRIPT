@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .bgimg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .clock {
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body data-img='{"1":"img/1.jpg", "2":"img/2.jpg", "3":"img/3.jpg", "4":"img/4.jpg"}'>
+
+    <img src="img/1.jpg" class="bgimg">
+
+    <div class="clock">
+        <h2>00:00:00</h2>
+    </div>
+
+    <script>
+
+        function createTime() {
+            /* 
+            1. 이 함수는 1초마다 실행
+            2. 날짜객체 생성 
+            3. getHours(), getMinues(), getSecond() 함수를 이용해서 날짜를 조합
+            4. 조합한 결과를 h2태그에 반영
+            */
+
+            var clock = document.querySelector(".clock h2");
+
+
+            var date = new Date();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+
+            /* time = hour + ":" +
+                (minute < 10 ? "0" + minute : minute) + ":" +
+                (second < 10 ? "0" + second : second) */
+            
+            var time = `${hour < 10 ? `0${hour}` : hour}:${minute < 10 ? `0${minute}` : minute}:${second < 10 ? `0${second}` : second} `;
+
+            clock.innerHTML = time;
+
+        }
+
+        
+
+        var body = document.querySelector("body");
+        var num = 0;
+
+        function changeBackground() {
+            /* 
+            1. 이 함수는 10초마다 실행
+            2. body에 있는 dataset객체를 얻어옵니다.
+            3. img태그를 생성하고 경로를 src에 추가
+            4. class에 bgimg추가
+            5. body에 appendChild로 이미지를 추가
+            */
+
+            var data = body.dataset.img;
+            var jsondata = JSON.parse(data);
+
+            var img = document.createElement("img");
+            img.src = jsondata[++num];
+            img.className = "bgimg";
+            body.appendChild(img);
+            //console.dir(jsondata);
+
+            //객체의 길이를 구하는 방법
+            if(num === Object.keys(jsondata).length) num=0;
+
+        }
+
+        
+        (function () {
+            createTime(); //시작할 때 호출
+            setInterval(createTime, 1000);
+            changeBackground();
+            setInterval(changeBackground, 1000);
+        })();
+
+    </script>
+
+
+
+</body>
+
+</html>

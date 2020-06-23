@@ -39,8 +39,7 @@
             //console.log(event.target.className); //단일클래스값 확인
             //console.log(event.target.classList); //다중클래스값 확인
             //console.dir(event.target); //classList, className (classList에서 사용할 수 있는 함수 확인(proto))
-            console.log(event.target.classList.contains("sel"));
-
+            //console.log(event.target.classList.contains("sel"));
             //이벤트의 타겟클래스에 sel이 포함되어 있다면 true, 아니라면 flase
             if(event.target.classList.contains("sel")) {
                 event.target.parentElement.style.color = "red"; //버튼의 부모(div)로 가서 색깔변경
