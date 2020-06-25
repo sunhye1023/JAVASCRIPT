@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>코로나19 마스크 판매 현황</h2>
+    <div id="map"></div>
+    <script>
+        var map;
+        function initMap() {
+
+
+        }
+
+        var lat;
+        var lng;
+        function ajax(position) {
+
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            //console.log(position.coords.latitude);
+            //console.log(position.coords.longitude);
+
+            fetch(`https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=${lat}&lng=${lng}&m=5000`).then(function (response) {
+
+                //console.log(response);
+                if (response.status !== 200) {
+                    alert("서버와의 통신 실패!");
+                    return;
+                } else {
+                    return response.json();
+                }
+            }).then(function (jsonData) {
+                console.log(jsonData);
+                //지도에 맵을 생성하는 코드
+                    map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 13,
+                    center: new google.maps.LatLng(lat, lng)
+
+                });
+
+                var script = document.createElement('script');
+                script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
+                document.getElementsByTagName('head')[0].appendChild(script);
+
+                //지도에 좌표를 찍어주는 코드
+                window.eqfeed_callback = function (jsonData) {
+
+                
+                    console.log(jsonData);
+
+                    //마커를 루프로 돌려서 화면에 찍어주는 코드
+                    for (var i = 0; i < jsonData.features.length; i++) {
+
+                        var coords = jsonData.features[i].geometry.coordinates;
+                        var latLng = new google.maps.LatLng(lat, lng);
+                        var marker = new google.maps.Marker({
+                            position: latLng,
+                            map: map
+                        });
+                    }
+                }
+
+
+            });
+
+        }
+
+        //위치정보 실패 함수
+        function coordFail() {
+
+                }
+
+        function initMap() {
+            navigator.geolocation.getCurrentPosition(ajax, coordFail);
+        };
+
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBINtiw2bQwFy5waldt5qWXw6tszuD3ZBE&callback=initMap">
+        </script>
+
+
+</body>
+
+</html>

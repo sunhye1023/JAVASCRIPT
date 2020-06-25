@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        * {padding: 0; margin: 0;}
+        ul, li {list-style: none;}
+        .text h3 {text-align: center; font-size: 30px; margin-bottom: 20px;}
+        .movieList {overflow: hidden; width: 80%; margin: 0 auto;}
+        .movieList .movie {float: left; width: 33.3333%; height: 300px; position: relative;}
+        .movie img {position: absolute; top: 0; left: 0; width: 100px;}
+
+        .movie .inner {padding-left: 110px; padding-right: 10px;}
+        .movie .genres li {display: inline-block; margin-left: 5px;}
+        .movie p {overflow: scroll; height: 100px;}
+    </style>
+
 </head>
 <body>
     
-    <div>
+    <div class="text">
         <h3>무비리스트</h3>
     </div>
      <div class="movieList">
@@ -30,7 +44,7 @@
     <script>
         //ajax연습사이트 https://yts.mx/api
 
-        fetch("https://yts.mx/api/v2/list_movies.json?sort_by=rating").then(function(response) {
+        fetch("https://yts.mx/api/v2/list_movies.json?sort_by=rating").then(function(response) { //등급순정렬
             //console.log(response);
 
             if(response.status !== 200) {
@@ -41,12 +55,11 @@
             }
 
         }).then(function(jsonData) {
-
             //console.log(jsonData);
             var movieDataList = jsonData.data.movies; //화면에 출력할 데이터만 추출
-
+            //console.log(movieDataList[0]);
             var movieList = document.querySelector(".movieList");
-
+            //console.log(movieList);
 
             var tag = "";
             for(var i=0; i<movieDataList.length; i++) {
@@ -55,13 +68,15 @@
                 var title = movieDataList[i].title;
                 var year = movieDataList[i].year;
                 var genres = movieDataList[i].genres;
+                //var rating = movieDataList[i].rating;
                 var summary = movieDataList[i].summary;
 
-                console.log(img);
-                console.log(title);
-                console.log(year);
-                console.log(genres);
-                console.log(summary);
+                // console.log(img);
+                // console.log(title);
+                // console.log(year);
+                // console.log(genres);
+                // console.log(rating);
+                // console.log(summary);
 
 
             tag += '<div class="movie">';
@@ -70,8 +85,11 @@
             tag += '<h3 class="title">'+ title +'</h3>';
             tag += '<h3 class="year">'+ year +'</h3>';
             tag += '<ul class="genres">';
-            tag += genres
+                    for(var j of genres) { //var j of genres는 value값을 뽑아준다, var j in genres는 인덱스값을 뽑아준다
+                        tag += '<li>'+ j +'</li>'
+                    }
             tag += '</ul>';
+            //tag += '<p class="rating">'+ rating +'</p>';
             tag += '<p class="summary">'+ summary +'</p>';
             tag += '</div>';
             tag += '</div>';
@@ -79,8 +97,7 @@
         }
 
         movieList.innerHTML = tag;
-        console.log(tag);
-
+        //console.log(tag);
 
         })
 
