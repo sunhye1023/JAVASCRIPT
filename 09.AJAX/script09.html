@@ -41,8 +41,7 @@
             //console.log(position.coords.latitude);
             //console.log(position.coords.longitude);
 
-            fetch(`https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=34&lng125&m=5000`).then(function (response) {
-
+            fetch(`http://openapi.seoul.go.kr:8088/6363676c6962686335364b69517547/JSON/SdeWarnhydrantgt/1/5/`).then(function (response) {
                 //console.log(response);
                 if (response.status !== 200) {
                     alert("서버와의 통신 실패!");
@@ -51,7 +50,7 @@
                     return response.json();
                 }
             }).then(function (jsonData) {
-                //console.log(jsonData);
+                console.log(jsonData);
                 //지도에 맵을 생성하는 코드
                     map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 14,
@@ -71,30 +70,30 @@
                     //console.log(data);
 
                     //마커를 루프로 돌려서 화면에 찍어주는 코드
-                    for(var i=0; i<data.length; i++) {
+                    // for(var i=0; i<data.length; i++) {
 
-                        var latLng = new google.maps.LatLng(data[i].lat, data[i].lng);
-                        var marker = new google.maps.Marker({
-                            position: latLng, //position은 key
-                            map: map, //map은 key
-                            title: data[i].addr + "\n" + data[i].name + "\n" + (function() {
+                    //     var latLng = new google.maps.LatLng(data[i].lat, data[i].lng);
+                    //     var marker = new google.maps.Marker({
+                    //         position: latLng, //position은 key
+                    //         map: map, //map은 key
+                    //         title: data[i].addr + "\n" + data[i].name + "\n" + (function() {
 
-                                    if(data[i].remain_stat === "plenty") {
-                                        return "100+"
-                                    } else if(data[i].remain_stat === "some") {
-                                        return "30~100"
-                                    } else if(data[i].remain_stat === "few") {
-                                        return "30-" 
-                                    } else {
-                                        return "재고없음"
-                                    }
+                    //                 if(data[i].remain_stat === "plenty") {
+                    //                     return "100+"
+                    //                 } else if(data[i].remain_stat === "some") {
+                    //                     return "30~100"
+                    //                 } else if(data[i].remain_stat === "few") {
+                    //                     return "30-" 
+                    //                 } else {
+                    //                     return "재고없음"
+                    //                 }
 
-                                })()
+                    //             })()
                                     
 
-                        })
+                    //     })
 
-                    }
+                    // }
 
                 }
 
